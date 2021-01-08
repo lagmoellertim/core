@@ -41,7 +41,7 @@ jobs:
         run: |
           docker build \
             --build-arg BUILD_VERSION=${GITHUB_REF##*/}-${{ github.run_number }} \
-            --tag hass_emulated_hue:ci \
+            --tag hassio-hue-emulator:ci \
             --platform ${{ matrix.arch }} \
             --file ./Dockerfile \
             --load \
@@ -53,7 +53,7 @@ jobs:
         run: |
           docker build \
             --build-arg BUILD_VERSION=${GITHUB_REF##*/} \
-            --tag hass_emulated_hue:ci \
+            --tag hassio-hue-emulator:ci \
             --platform ${{ matrix.arch }} \
             --file ./Dockerfile \
             --load \
@@ -61,11 +61,11 @@ jobs:
 
       - name: Inspect
         run: |
-          docker image inspect hass_emulated_hue:ci
+          docker image inspect hassio-hue-emulator:ci
 
       - name: Save tarball
         run: |
-          docker save --output output.tar hass_emulated_hue:ci
+          docker save --output output.tar hassio-hue-emulator:ci
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
