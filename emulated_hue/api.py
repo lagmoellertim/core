@@ -765,9 +765,11 @@ class HueApi:
                     # prefer real zigbee address if we have that
                     # might come in handy later when we want to
                     # send entertainment packets to the zigbee mesh
-                    for key, value in device["identifiers"].items():
-                        if key == "zha":
-                            retval["uniqueid"] = value
+                    for data in device["identifiers"]:
+                        if len(data) == 2:
+                            key, value = data
+                            if key == "zha":
+                                retval["uniqueid"] = value
 
         return retval
 
